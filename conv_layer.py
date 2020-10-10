@@ -2,13 +2,13 @@ import tensorflow.compat.v1 as tf
 tf.compat.v1.disable_eager_execution()
 import numpy as np
 
-def init_filter(d, mi, mo, stride):
-  return (np.random.randn(d, d, mi, mo) * np.sqrt(2.0 / (d * d * mi))).astype(np.float32)
+def init_filter(d, maps_input, maps_output, stride):
+  return (np.random.randn(d, d, maps_input, maps_output) * np.sqrt(2.0 / (d * d * maps_input))).astype(np.float32)
 
 class ConvLayer:
-  def __init__(self, d, mi, mo, stride=2, padding='VALID'):
-    self.W = tf.Variable(init_filter(d, mi, mo, stride))
-    self.b = tf.Variable(np.zeros(mo, dtype=np.float32))
+  def __init__(self, d, maps_input, maps_output, stride=2, padding='VALID'):
+    self.W = tf.Variable(init_filter(d, maps_input, maps_output, stride))
+    self.b = tf.Variable(np.zeros(maps_output, dtype=np.float32))
     self.stride = stride
     self.padding = padding
 
