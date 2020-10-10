@@ -78,7 +78,7 @@ class PartialResNet:
 
   def get_params(self):
     params = []
-    # TODO: finish this
+    # TODO
 
 X = np.random.random((1, 224, 224, 3))
 
