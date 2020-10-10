@@ -8,7 +8,7 @@ def init_filter(d, maps_input, maps_output, stride):
 class ConvLayer:
   def __init__(self, d, maps_input, maps_output, stride=2, padding='VALID'):
     self.W = tf.Variable(init_filter(d, maps_input, maps_output, stride))
-    self.b = tf.Variable(np.zeros(maps_output, dtype=np.float32))
+    self.bias = tf.Variable(np.zeros(maps_output, dtype=np.float32))
     self.stride = stride
     self.padding = padding
 
@@ -19,23 +19,23 @@ class ConvLayer:
       strides=[self.stride, self.stride],
       padding=self.padding
     )
-    X = X + self.b
+    X = X + self.bias
     return X
 
   def copyFromKerasLayers(self, layer):
     # only 1 layer to copy from
-    W, b = layer.get_weights()
+    W, bias = layer.get_weights()
     op1 = self.W.assign(W)
-    op2 = self.b.assign(b)
-    self.session.run((op1, op2))
-
+    op2 = self.bias.assign(bias)
+    self.session.run((op1, op2))  
+    
   # def copyFromWeights(self, W, b):
   #   op1 = self.W.assign(W)
   #   op2 = self.b.assign(b)
   #   self.session.run((op1, op2))
 
   def get_params(self):
-    return [self.W, self.b]
+    return [self.W, self.bias]
 
 # init_op = tf.global_variables_initializer()
 # conv=ConvLayer(1, 3, 64, 2)
