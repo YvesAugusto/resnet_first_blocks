@@ -1,14 +1,6 @@
-# https://deeplearningcourses.com/c/advanced-computer-vision
-# https://www.udemy.com/advanced-computer-vision
 from __future__ import print_function, division
 from builtins import range, input
-# Note: you may need to update your version of future
-# sudo pip install -U future
 
-
-# Let's go up to the end of the first conv block
-# to make sure everything has been loaded correctly
-# compared to keras
 import tensorflow.compat.v1 as tf
 import numpy as np
 import matplotlib.pyplot as plt
