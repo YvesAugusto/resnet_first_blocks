@@ -17,9 +17,8 @@ from main import ConvBlock
 import keras
 
 
-class PartialResNet:
+class ResNet:
   def __init__(self, maps_input, fm_sizes, stride=2):
-    # assert (len(fm_sizes) == 2)
     self.session = None
     self.f = tf.nn.relu
     self.stride=stride
@@ -47,10 +46,6 @@ class PartialResNet:
 
     return FX
 
-  def copyFromKerasLayers(self, layers):
-    # TODO
-    pass
-
   def predict(self, X):
     assert (self.session is not None)
     return (
@@ -66,17 +61,12 @@ class PartialResNet:
     self.conv0.session = session
     self.conv_block1.session=session
     self.btn0.session=session
-    # TODO: finish this
-
-  def get_params(self):
-    params = []
-    # TODO
 
 X = np.random.random((1, 224, 224, 3))
 
 if __name__ == '__main__':
 
-  my_net = PartialResNet(maps_input=3, fm_sizes=[64])
+  my_net = ResNet(maps_input=3, fm_sizes=[64])
   X = X.astype(np.float32)
   a=my_net.forward(X)
-  print(a.shape)
+  print(f'output shape: {a.shape}')
