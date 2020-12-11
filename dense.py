@@ -8,10 +8,6 @@ class DenseLayer:
     self.b = tf.Variable(np.zeros(mo, dtype=np.float32))
 
   def forward(self, X):
-    # unfortunately these all yield slightly different answers
-    # return tf.nn.softmax(tf.matmul(X, self.W) + self.b)
-    # return custom_softmax(tf.matmul(X, self.W) + self.b)
-    # return keras.activations.softmax(tf.matmul(X, self.W) + self.b)
     return tf.matmul(X, self.W) + self.b
 
   def copyFromKerasLayers(self, layer):
